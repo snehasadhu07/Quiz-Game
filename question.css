@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Quiz box */
+.quiz-container {
+    width: 500px;
+    background-color: white;
+
+    padding: 40px;
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    text-align: center;
+}
+
+/* Question */
+#question {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* Options container */
+#option {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Option buttons */
+#option button {
+    width: 100%;
+    padding: 14px;
+
+    border: 2px solid #243b55;
+    border-radius: 8px;
+
+    background-color: white;
+    color: #243b55;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover effect */
+#option button:hover {
+    background-color: #243b55;
+    color: white;
+}
+
+/* Next button */
+#nxt{
+    margin-top: 30px;
+
+    padding: 12px 30px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #243b55;
+    color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#next_btn:hover {
+    background-color: #141e30;
+}
