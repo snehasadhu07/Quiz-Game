@@ -64,7 +64,7 @@ let option= document.getElementById('option');
 let start= document.querySelector('#start_btn');
 let next= document.querySelector('#nxt');
 
-const showQu = ()=>{
+const showQu = () => {
     question.textContent = questions[currQuestion].question;
     option.innerHTML = "";
 
@@ -75,8 +75,29 @@ const showQu = ()=>{
         button.textContent = op;
 
         option.appendChild(button);
+
+        // Check the answer
+        button.addEventListener("click", () => {
+
+            let userch = button.textContent;
+            let answer = questions[currQuestion].answer;
+
+            if (answer === userch) {
+                button.style.backgroundColor = "green";
+                score++;
+                alert("+1");
+            } else {
+                button.style.backgroundColor = "red";
+            }
+
+            // Disable all option buttons
+            document.querySelectorAll("#option button").forEach(btn => {
+                btn.disabled = true;
+            });
+
+        });
     });
-}
+};
 
 showQu();
 
@@ -85,4 +106,6 @@ const nxt_btn = ()=>{
         showQu();
     
 };
+
+
 
