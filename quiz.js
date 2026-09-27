@@ -56,56 +56,124 @@ const questions = [
     }
 ];
 
-let score= 0;
-let currQuestion=0;
+let currQuestion = 0;
+let score = 0;
 
-let question= document.getElementById('question');
-let option= document.getElementById('option');
-let start= document.querySelector('#start_btn');
-let next= document.querySelector('#nxt');
+let question = document.getElementById("question");
+let option = document.getElementById("option");
+let start = document.querySelector("#start_btn");
+let next = document.querySelector("#nxt");
 
-const showQu = () => {
-    question.textContent = questions[currQuestion].question;
-    option.innerHTML = "";
 
-    questions[currQuestion].options.forEach(function(op) {
+// START BUTTON
 
-        const button = document.createElement("button");
+if (start) {
 
-        button.textContent = op;
+    start.addEventListener("click", () => {
 
-        option.appendChild(button);
+        score = 0;
+        currQuestion = 0;
 
-        // Check the answer
-        button.addEventListener("click", () => {
+        localStorage.removeItem("score");
 
-            let userch = button.textContent;
-            let answer = questions[currQuestion].answer;
+        location.href = "questions.html";
 
-            if (answer === userch) {
-                button.style.backgroundColor = "green";
-                score++;
-                alert("+1");
-            } else {
-                button.style.backgroundColor = "red";
-            }
+    });
 
-            // Disable all option buttons
-            document.querySelectorAll("#option button").forEach(btn => {
-                btn.disabled = true;
+}
+
+
+// QUESTIONS PAGE
+
+if (question && option && next) {
+
+    const showQu = () => {
+
+        question.textContent =
+            questions[currQuestion].question;
+
+        option.innerHTML = "";
+
+
+        questions[currQuestion].options.forEach((op) => {
+
+            const button = document.createElement("button");
+
+            button.textContent = op;
+
+            option.appendChild(button);
+
+
+            // CHECK ANSWER
+
+            button.addEventListener("click", () => {
+
+                let userAnswer = button.textContent;
+                let correctAnswer = questions[currQuestion].answer;
+
+
+                if (userAnswer === correctAnswer) {
+
+                    button.style.backgroundColor = "green";
+
+                    score++;
+
+                } else {
+
+                    button.style.backgroundColor = "red";
+
+                    // Show correct answer
+                    document
+                        .querySelectorAll("#option button")
+                        .forEach((btn) => {
+
+                            if (btn.textContent === correctAnswer) {
+                                btn.style.backgroundColor = "green";
+                            }
+
+                        });
+
+                }
+
+
+                // Disable all options
+
+                document
+                    .querySelectorAll("#option button")
+                    .forEach((btn) => {
+
+                        btn.disabled = true;
+
+                    });
+
             });
 
         });
+
+    };
+
+
+    showQu();
+
+
+    // NEXT BUTTON
+
+    next.addEventListener("click", () => {
+
+        if (currQuestion === questions.length - 1) {
+
+            localStorage.setItem("score", score);
+
+            location.href = "result.html";
+
+        } else {
+
+            currQuestion++;
+
+            showQu();
+
+        }
+
     });
-};
 
-showQu();
-
-const nxt_btn = ()=>{
-    currQuestion++;
-        showQu();
-    
-};
-
-
-
+}
